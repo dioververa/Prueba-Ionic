@@ -4,14 +4,35 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="home-container">
   <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+    <div *ngFor="let film of films; let i=index" class="card-container">
+        <div class="card-header">
+          <div class="card-author--no-cover">
+              <h3>{{film.director}}</h3>
+          </div>
+        </div>
+      
+        <div class="card-body">
+          <div class="card-title">
+            <h1><a href="#">{{film.title}}</a></h1>
+          </div>
+          <div class="card-summary">
+            <p>{{film.opening_crawl | limitTo: 200}}</p>
+          </div>
+          <div class="card-actors">
+            
+              <!--<a href="#" *ngFor="let actor of actors[i]; let j=index">{{actor.name}}</a>-->
+            
+          </div>
+        </div>
+        
+        <div class="card-footer">
+          <ul>
+            <li class="release-date">{{film.created}}</li>
+            <li class="starships"><a href="#"><span class="numero">{{film.starships.length}}</span></a></li>
+            <li class="vehicles"><a href="#"><span class="numero">{{film.vehicles.length}}</span></a></li>
+          </ul>
+        </div>
+      </div>
 </ion-content>

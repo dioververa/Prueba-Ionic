@@ -1,3 +1,143 @@
 page-home {
 
+    .home-container {
+        background: #5e5b58;
+        box-sizing: border-box;
+    }
+
+    .card-container {
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: hsla(0, 0, 0, .2) 0 4px 2px -2px;
+        font-family: "adelle-sans", sans-serif;
+        font-weight: 100;
+        margin: 48px auto;
+        width: 90%;
+        @media screen and (min-width: 480px) {
+        width: 90%;
+        }
+        @media screen and (min-width: 767px) {
+        width: 90%;
+        }
+        @media screen and (min-width: 959px) {
+        width: 90%;
+        }
+    }
+    .card-container a {
+        color: #4d4dff;
+        text-decoration: none;
+        transition: .25s ease;
+        &:hover {
+        border-color: #ff4d4d;
+        color: #ff4d4d;
+        }
+    }
+    
+    // card header
+    //-------------------------
+    .card-author,
+    .card-author--no-cover {
+        margin: 0 auto;
+        padding-top: .125rem;
+        width: 80%;
+    }
+
+    .card-author h3 {
+        color: #fff;
+        font-weight: 100;
+    }
+    .card-author--no-cover h3 {
+        color: lighten(#333, 40%);
+        font-weight: 100;
+    }
+    
+    // card body
+    //-------------------------
+    .card-body {
+        margin: 0 auto;
+        width: 80%;
+    }
+
+    .card-title h1 a {
+        color: #333;
+        font-weight: 100;
+    }
+    .card-summary p {
+        color: lighten(#333, 10%);
+    }
+
+    .card-actors {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-auto-rows: minmax(50px, auto);
+        list-style: none;
+        padding-left: 0;
+    }
+    .card-actors a {
+        margin-left: 0.5rem;
+        grid-column: span 1;
+        border: 1px solid lighten(#333, 40%);
+        border-radius: 3px;
+        color: lighten(#333, 40%);
+        font-size: 1.05rem;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        letter-spacing: 1px;
+        padding: 0 .8rem;
+        margin-left: 2rem;
+        text-align: center;
+        text-transform: uppercase;
+        white-space: nowrap;
+        width: 9rem;
+    }
+    
+    // card footer
+    //-------------------------
+    .card-footer {
+        border-top: 1px solid lighten(#333, 70%);
+        margin: 0 auto;
+        padding-bottom: .125rem;
+        width: 80%;
+    }
+    .card-footer ul {
+        list-style: none;
+        display: flex;
+        flex: row wrap;
+        justify-content: flex-end;
+        padding-left: 0;
+    }
+    .card-footer li:first-child {
+        margin-right: auto;
+    }
+    .card-footer li + li {
+        margin-left: .5rem;
+    }
+    .card-footer li {
+        color: lighten(#333, 40%);
+        font-size: .75rem;
+        height: 1.5rem;
+        letter-spacing: 1px;
+        line-height: 1.5rem;
+        text-align: center;
+        text-transform: uppercase;
+        position: relative;
+        white-space: nowrap;
+        & a {
+        color: lighten(#333, 40%);
+        }
+    }
+    .comments {
+        margin-right: 1rem;
+    }
+    .release-date {
+        border: 1px solid lighten(#333, 40%);
+        border-radius: 3px;
+        padding: 0 .5rem;
+    }
+    .numero {
+        position: relative;
+        top: -0.5rem;
+    }
+    
+  
 }
