@@ -88,7 +88,10 @@ page-home {
         text-align: center;
         text-transform: uppercase;
         white-space: nowrap;
-        width: 9rem;
+        width: 11rem;
+        word-wrap: break-word;
+        text-overflow: ellipsis; /* if text is too long add three dots to the end to indicate text  continues */
+        overflow: hidden;
     }
     
     // card footer
@@ -138,6 +141,36 @@ page-home {
         position: relative;
         top: -0.5rem;
     }
-    
+  
+    .pagination {
+        text-align: right;
+        margin-top: 2.142857142857143em;
+      }
+      .pagination .page-numbers {
+        background: #ebeeef;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        color: #44494b;
+        display: inline-block;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 1;
+        margin: 0 3px 3px;
+        padding: 9px 14px;
+        text-align: center;
+      }
+      .pagination .page-numbers:hover:not(.disabled),
+      .pagination .page-numbers.current:not(.disabled) {
+        background: #e6b706;
+        color: #44494b;
+      }
+      .pagination .page-numbers.dots {
+        border: none;
+        background: none;
+        border-radius: 0px;
+        color: #44494b;
+        padding-left: 0.7142857142857143em;
+        padding-right: 0.7142857142857143em;
+      }
   
 }

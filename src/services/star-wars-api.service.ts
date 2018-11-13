@@ -3,83 +3,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Observable';
+import { Ifilm } from '../interfaces/IFilm';
+import { Istarship } from '../interfaces/IStarShip';
+import { Ivehicle } from '../interfaces/IVehicle';
+import { Ipeople } from '../interfaces/Ipeople';
  
 
-export interface Ifilm {
-	title: string;
-    episode_id: string;
-	opening_crawl: string;
-	director: string;
-    producer: string;
-    release_date: string;
-    characters: string[];
-    planets: string[];
-    starships: string[];
-    vehicles: string[];
-    species: string[];
-    created: string;
-    edited: string;
-    url: string;
-}
-
-export interface Ipeople {
-	name: string;
-    height: string;
-	mass: string;
-	hair_color: string;
-    skin_color: string;
-    eye_color: string;
-    birth_year: string;
-    gender: string;
-    homeworld: string;
-    films: string[];
-    species: string[];
-    vehicles: string[];
-    starships: string[];
-    created: string;
-    edited: string;
-    url: string;
-}
-
-export interface Istarship {
-	name: string;
-    model: string;
-	manufacturer: string;
-	cost_in_credits: string;
-    length: string;
-    max_atmosphering_speed: string;
-    crew: string;
-    passengers: string;
-    cargo_capacity: string;
-    consumables: string;
-    hyperdrive_rating: string;
-    MGLT: string;
-    starship_class: string;
-    pilots: string[];
-    films: string[];
-    created: string;
-    edited: string;
-    url: string;
-}
-
-export interface Ivehicle {
-	name: string;
-    model: string;
-	manufacturer: string;
-	cost_in_credits: string;
-    length: string;
-    max_atmosphering_speed: string;
-    crew: string;
-    passengers: string;
-    cargo_capacity: string;
-    consumables: string;
-    vehicle_class: string;
-    pilots: string[];
-    films: string[];
-    created: string;
-    edited: string;
-    url: string;
-}
 
 interface IstarWarsService<T> {
     count: number;
@@ -98,19 +27,19 @@ export class StarWarsService {
     }
  
 
-    getFilms(page:number): Observable<IstarWarsService<Ifilm>> {
-        return this.http.get<IstarWarsService<Ifilm>>(`${this.urlBase}/films/?page=${page}`);
+    getFilms(url: string): Observable<IstarWarsService<Ifilm>> {
+        return this.http.get<IstarWarsService<Ifilm>>(url);
     }
 
-    getStarships(page:number) {
-        return this.http.get<IstarWarsService<Istarship>>(`${this.urlBase}/starships/?page=${page}`);
+    getStarships(url: string): Observable<IstarWarsService<Istarship>>{
+        return this.http.get<IstarWarsService<Istarship>>(url);
     }
 
-    getVehicles(page:number) {
-        return this.http.get<IstarWarsService<Ivehicle>>(`${this.urlBase}/vehicles/?page=${page}`);
+    getVehicles(url: string): Observable<IstarWarsService<Ivehicle>>{
+        return this.http.get<IstarWarsService<Ivehicle>>(url);
     }
 
-    getCharacterByUrl(url: string) {
+    getCharacterByUrl(url: string): Observable<Ipeople>{
         return this.http.get<Ipeople>(url);
     }
  

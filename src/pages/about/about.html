@@ -1,11 +1,49 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      About
-    </ion-title>
+    <ion-title>Vehicles</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="home-container">
+  <h2>Welcome to Ionic!</h2>
 
+    <!-- pager -->
+    <div class="pagination list-center">
+      <ul >
+
+        <li >
+          <a class='next page-numbers' (click)="previousPage()"><ion-icon name="ios-arrow-back-outline"></ion-icon></a>
+        </li>
+        <li >
+          <a class='next page-numbers' (click)="nextPage()"><ion-icon name="ios-arrow-forward-outline"></ion-icon></a>
+        </li>
+
+      </ul>
+    </div>
+
+    <div *ngFor="let vehicle of vehicles; let i=index" class="card-container">
+        <div class="card-header">
+          <div class="card-author--no-cover">
+              <h3>{{vehicle.model}}</h3>
+          </div>
+        </div>
+      
+        <div class="card-body">
+          <div class="card-title">
+            <h1><a href="#">{{vehicle.name}}</a></h1>
+          </div>
+          <div class="card-summary">
+            <p>{{vehicle.manufacturer | limitTo: 200}}</p>
+          </div>
+        </div>
+        
+        <div class="card-footer">
+          <ul>
+            <li class="release-date">{{vehicle.created}}</li>
+            <li class="starships"><a href="#">Starships<span class="numero">{{vehicle.pilots.length}}</span></a></li>
+            <li class="vehicles"><a href="#">Vehicles<span class="numero">{{vehicle.films.length}}</span></a></li>
+          </ul>
+        </div>
+      </div>
 </ion-content>
+
