@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Films</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="home-container">
+    <!-- pager -->
+    <div class="pagination">
+      <ul >
+
+        <li >
+          <button class='next page-numbers' (click)="previousPage()" [disabled]="!isenabledPrevious"><ion-icon name="ios-arrow-back-outline"></ion-icon></button>
+        </li>
+        <li >
+          <button class='next page-numbers' (click)="nextPage()" [disabled]="!isenabledNext"><ion-icon name="ios-arrow-forward-outline"></ion-icon></button>
+        </li>
+
+      </ul>
+    </div>
+
+    <ion-list>
+      <div *ngFor="let film of films; let i=index" class="card-container">
+        <div class="card-header">
+          <div class="card-author--no-cover">
+              <h4>{{film.director}}</h4>
+          </div>
+        </div>
+      
+        <div class="card-body">
+          <div class="card-title">
+            <h1><a href="#">{{film.title}}</a></h1>
+          </div>
+          <div class="card-summary">
+            <p>{{film.opening_crawl | limitTo: 200}}</p>
+          </div>
+          <div class="card-actors">
+            
+              <a href="#" *ngFor="let people of film.peoples; let j=index"
+              (click)="presentActorModal(i, j)" >{{people.name}}</a>
+            
+          </div>
+        </div>
+        
+        <div class="card-footer">
+          <ul>
+            <li class="release-date">{{film.created | date: 'dd/MM/yyyy'}}</li>
+            <li class="starships"><a href="#"><span class="numero">Starships {{film.starships.length}}</span></a></li>
+            <li class="vehicles"><a href="#"><span class="numero">Vehicles {{film.vehicles.length}}</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </ion-list>
+</ion-content>

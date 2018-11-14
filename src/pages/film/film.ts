@@ -7,32 +7,41 @@ import { map, take } from 'rxjs/operators';
 import { Ifilm } from '../../interfaces/IFilm';
 import { Ipeople } from '../../interfaces/Ipeople';
 
+import { ModalController, NavParams } from 'ionic-angular';
+import { Actor } from '../actor/actor';
+
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html',
+  selector: 'film',
+  templateUrl: 'film.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePage implements OnInit, OnDestroy{
+export class filmComponent implements OnInit, OnDestroy{
 
   films: Ifilm[] = [];
   countFilms: number = 0;
   next: string;
   previous: string;
-
+  isenabledPrevious:boolean=true;
+  isenabledNext:boolean=true;
 
   private subscription: ISubscription;
 
   constructor(
     public navCtrl: NavController,
     private s_startWars: StarWarsService,
-    private cd: ChangeDetectorRef
-  ) {
-      console.log("HomePage constructor");
-  }
+    private cd: ChangeDetectorRef,
+    public modalCtrl: ModalController
+  ) {}
 
   ngOnInit() {
     let url = 'https://swapi.co/api/films';
     this.setPage(url);
+  }
+
+  presentActorModal(filmIndex, peopleIndex) {
+    let actor = this.films[filmIndex].peoples[peopleIndex];
+    let profileModal = this.modalCtrl.create(Actor, { actor: actor });
+    profileModal.present();
   }
 
   nextPage(){
@@ -52,21 +61,19 @@ export class HomePage implements OnInit, OnDestroy{
     let self = this;
     this.subscription = this.s_startWars.getFilms(url).pipe(
     map( (resp) => {
-      console.log("HomePage ngOnInit resp: ",resp);
+      this.films = resp.results
+      self.cd.markForCheck();
       resp.results.forEach((film, i) => {
         
         let len = film.characters.length;
         let peoples = []
         Promise.resolve(0).then(function loop(j) {
-          console.log("HomePage ngOnInit loop j: ",j);
           
           if (j < len) {  
             let urlPeople = film.characters[j];
             return  self.getActors(j, urlPeople, peoples).then(loop);
           }
         }).then( () => {
-          console.log("HomePage ngOnInit done i: ", i);
-          console.log("HomePage ngOnInit done peoples: ",peoples);
           self.films[i].peoples = peoples
           self.cd.markForCheck();
           
@@ -75,17 +82,15 @@ export class HomePage implements OnInit, OnDestroy{
         });
         
       });
-      console.log("HomePage getCharacterByUrl this.films: ",this.films) 
-      //this.cd.markForCheck();
-      //console.log("HomePage ngOnInit resp 2: ",resp);
       return resp;
     }))
     .subscribe( resp => {
-      console.log("HomePage getCharacterByUrl this.films 2: ",this.films) 
-      this.films = resp.results
       this.countFilms = resp.count
-      this.next = resp.next
       this.previous = resp.previous
+      this.next = resp.next
+      this.isenabledPrevious = this.previous == null ? false : true;
+      this.isenabledNext = this.next == null ? false : true;
+
     })
 
   }
@@ -95,7 +100,6 @@ export class HomePage implements OnInit, OnDestroy{
     return new Promise( (resolve, reject) => {
       this.s_startWars.getCharacterByUrl(urlPeople).pipe(take(1),
       map( (char) => {
-        console.log("HomePage getCharacterByUrl char: ",char) 
         peoples[j] = char as Ipeople;
         return resolve(j+1)
       })).subscribe()
@@ -107,3 +111,5 @@ export class HomePage implements OnInit, OnDestroy{
 	}
 
 }
+
+

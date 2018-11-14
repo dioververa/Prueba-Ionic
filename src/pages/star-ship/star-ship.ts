@@ -7,17 +7,18 @@ import { map, take } from 'rxjs/operators';
 import { Istarship } from '../../interfaces/IStarShip';
 
 @Component({
-  selector: 'page-contact',
-  templateUrl: 'contact.html',
+  selector: 'star-ship',
+  templateUrl: 'star-ship.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContactPage implements OnInit, OnDestroy {
+export class StarShipComponent implements OnInit, OnDestroy {
 
   starShips: Istarship[] = [];
   countStarShips: number = 0;
   next: string;
   previous: string;
-
+  isenabledPrevious:boolean=true;
+  isenabledNext:boolean=true;
 
   private subscription: ISubscription;
 
@@ -25,9 +26,7 @@ export class ContactPage implements OnInit, OnDestroy {
     public navCtrl: NavController,
     private s_startWars: StarWarsService,
     private cd: ChangeDetectorRef
-  ) {
-      console.log("HomePage constructor");
-  }
+  ) {}
 
   ngOnInit() {
     let url = 'https://swapi.co/api/starships';
@@ -51,7 +50,6 @@ export class ContactPage implements OnInit, OnDestroy {
     let self = this;
     this.subscription = this.s_startWars.getStarships(url).pipe(
     map( (resp) => {
-      console.log("HomePage ngOnInit resp: ",resp);
       return resp;
     }))
     .subscribe( resp => {
@@ -59,8 +57,9 @@ export class ContactPage implements OnInit, OnDestroy {
       this.countStarShips = resp.count
       this.next = resp.next
       this.previous = resp.previous
+      this.isenabledPrevious = this.previous == null ? false : true;
+      this.isenabledNext = this.next == null ? false : true;
       self.cd.markForCheck();
-      console.log("HomePage getCharacterByUrl this.films 2: ",this.starShips) 
     })
 
   }

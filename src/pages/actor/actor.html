@@ -1,0 +1,33 @@
+<ion-card>
+
+    <ion-item>
+      <h2>{{actor.name}}</h2>
+      <p>{{actor.birth_year}}</p>
+    </ion-item>
+  
+    <ion-card-content>
+      <p>{{actor.gender}}</p> 
+    </ion-card-content>
+  
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>{{actor.vehicles.length}} vehicles</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear small>
+            <ion-icon name="thumbs-up"></ion-icon>
+          <div>{{actor.films.length}} films</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <button ion-button icon-start clear small>
+            <ion-icon name="thumbs-up"></ion-icon>
+          <div>{{actor.starships.length}} starships</div>
+        </button>
+      </ion-col>
+    </ion-row>
+  
+  </ion-card>

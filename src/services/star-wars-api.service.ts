@@ -20,8 +20,6 @@ interface IstarWarsService<T> {
 @Injectable()
 export class StarWarsService {
 
-    private urlBase: string = 'https://swapi.co/api';
-
     constructor(private http: HttpClient) { 
         
     }

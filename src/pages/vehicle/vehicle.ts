@@ -7,17 +7,18 @@ import { map } from 'rxjs/operators';
 import { Ivehicle } from '../../interfaces/IVehicle';
 
 @Component({
-  selector: 'page-about',
-  templateUrl: 'about.html',
+  selector: 'vehicle',
+  templateUrl: 'vehicle.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AboutPage implements OnInit, OnDestroy {
+export class VehicleComponent implements OnInit, OnDestroy {
 
   vehicles: Ivehicle[] = [];
   countVehicles: number = 0;
   next: string;
   previous: string;
-
+  isenabledPrevious:boolean=true;
+  isenabledNext:boolean=true;
 
   private subscription: ISubscription;
 
@@ -25,9 +26,7 @@ export class AboutPage implements OnInit, OnDestroy {
     public navCtrl: NavController,
     private s_startWars: StarWarsService,
     private cd: ChangeDetectorRef
-  ) {
-      console.log("HomePage constructor");
-  }
+  ) {}
 
   ngOnInit() {
     let url = 'https://swapi.co/api/vehicles';
@@ -51,7 +50,6 @@ export class AboutPage implements OnInit, OnDestroy {
     let self = this;
     this.subscription = this.s_startWars.getVehicles(url).pipe(
     map( (resp) => {
-      console.log("HomePage ngOnInit resp: ",resp);
       return resp;
     }))
     .subscribe( resp => {
@@ -59,8 +57,9 @@ export class AboutPage implements OnInit, OnDestroy {
       this.countVehicles = resp.count
       this.next = resp.next
       this.previous = resp.previous
+      this.isenabledPrevious = this.previous == null ? false : true
+      this.isenabledNext = this.next == null ? false : true
       self.cd.markForCheck();
-      console.log("HomePage getCharacterByUrl this.films 2: ",this.vehicles) 
     })
 
   }
